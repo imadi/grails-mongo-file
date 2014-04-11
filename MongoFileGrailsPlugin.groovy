@@ -14,12 +14,12 @@ The MongoFile plugin provides a MongoFileService that saves, retrieves and delet
 
 Each file is stored in a MongoDB collection (bucket), named after the domain class name. This plugin depends on the MongoDB plugin.
 '''
-    def documentation = "https://github.com/quirklabs/grails-mongofile/blob/master/README.md"
+    def documentation = "https://github.com/quirklabs/grails-mongo-file/blob/master/README.md"
     def license = "APACHE"
     def organization = [ name: "Quirk Labs", url: "http://www.quirklabs.co.za" ]
     def developers = [[ name: "Juri Kuehn" ]]
-    def issueManagement = [ system: "github", url: "https://github.com/quirklabs/grails-mongofile/issues" ]
-    def scm = [ url: "https://github.com/quirklabs/grails-mongofile" ]
+    def issueManagement = [ system: "github", url: "https://github.com/quirklabs/grails-mongo-file/issues" ]
+    def scm = [ url: "https://github.com/quirklabs/grails-mongo-file" ]
 
     def doWithDynamicMethods = { ctx ->
         for(domainClass in application.domainClasses) {
