@@ -10,7 +10,6 @@ import org.bson.types.ObjectId
 import com.mongodb.WriteConcern
 import javax.servlet.http.HttpServletResponse
 import org.apache.commons.io.IOUtils
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import com.mongodb.DB
 import com.mongodb.BasicDBObject
 import com.mongodb.gridfs.GridFSFile
@@ -19,6 +18,8 @@ class MongoFileService {
 	static transactional = false
 
 	def mongo
+	def grailsApplication
+	
 	private HashMap<String, GridFS> _gridfs = new HashMap<String, GridFS>()
 
 	/**
@@ -227,7 +228,7 @@ class MongoFileService {
 	}
 	
 	def dropCollections() {
-	    def dbname = ApplicationHolder.application.config.mongodb?.database
+	    def dbname = grailsApplication.config.mongodb?.database
 		dbname = dbname?dbname+'db':'db'
 		DB db = mongo.mongo.getDB(dbname)
         def collectionNames = db.getCollectionNames()
@@ -240,7 +241,7 @@ class MongoFileService {
 	}
 	
 	def dropDatabase() {
-	    def dbname = ApplicationHolder.application.config.mongodb?.database
+	    def dbname = grailsApplication.config.mongodb?.database
 		dbname = dbname?dbname+'db':'db'
 		DB db = mongo.mongo.getDB(dbname)
 		db.dropDatabase()
@@ -249,7 +250,7 @@ class MongoFileService {
 	private GridFS getGridfs(String bucket) {
 		def gridfs = _gridfs[bucket]
 		if (!gridfs) {
-			def dbname = ApplicationHolder.application.config.mongodb?.database
+			def dbname = grailsApplication.config.mongodb?.database
 			dbname = dbname?dbname+'db':'db' // use db '<DBNAME>files' for files
 			DB db = mongo.mongo.getDB(dbname)
 
