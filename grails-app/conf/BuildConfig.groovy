@@ -38,7 +38,7 @@ grails.project.dependency.resolution = {
         compile ('eu.medsea.mimeutil:mime-util:2.1.3') {
             excludes([group:'org.slf4j', name:'slf4j-log4j12', version: '1.5.6']) 
         }
-		compile ('org.springframework.data:spring-data-mongodb:1.0.0.RELEASE') {
+		compile ('org.springframework.data:spring-data-mongodb:1.5.0.RELEASE') {
 			excludes('spring-core', 'spring-context', 'spring-expression')
 		}
     }
