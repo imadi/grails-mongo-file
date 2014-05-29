@@ -23,7 +23,6 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
@@ -39,12 +38,15 @@ grails.project.dependency.resolution = {
         compile ('eu.medsea.mimeutil:mime-util:2.1.3') {
             excludes([group:'org.slf4j', name:'slf4j-log4j12', version: '1.5.6']) 
         }
+		compile ('org.springframework.data:spring-data-mongodb:1.0.0.RELEASE') {
+			excludes('spring-core', 'spring-context', 'spring-expression')
+		}
     }
 
     plugins {
-        build ":release:3.0.1"
-
-        runtime ":mongodb:3.0.1"
+        build(":release:3.0.1") {
+			export = false
+		}
     }
 }
 

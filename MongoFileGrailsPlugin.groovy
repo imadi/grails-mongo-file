@@ -1,7 +1,7 @@
 class MongoFileGrailsPlugin {
-    def version = "1.2.2"
-    def grailsVersion = "2.4 > *"
-    def dependsOn = [mongodb:"3.0.1"]
+    def version = "1.3.1"
+    def grailsVersion = "2.0 > *"
+    def dependsOn = [:]
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
@@ -12,7 +12,7 @@ class MongoFileGrailsPlugin {
     def description = '''\
 The MongoFile plugin provides a MongoFileService that saves, retrieves and deletes files from a MongoDB file store. Furthermore, the domain classes have methods injected to handle these files.
 
-Each file is stored in a MongoDB collection (bucket), named after the domain class name. This plugin depends on the MongoDB plugin.
+Each file is stored in a MongoDB collection (bucket), named after the domain class name. 
 '''
     def documentation = "https://github.com/quirklabs/grails-mongo-file/blob/master/README.md"
     def license = "APACHE"
@@ -65,4 +65,12 @@ Each file is stored in a MongoDB collection (bucket), named after the domain cla
             }
         }
     }
+	
+	def doWithSpring = {
+		def mongoConfig = application.config.grails.mongo
+		def mongo = new com.mongodb.Mongo(mongoConfig.host instanceof String ? mongoConfig.host : 'localhost', mongoConfig.port instanceof Integer ? mongoConfig.port : 27017)
+		def credentials = new org.springframework.data.authentication.UserCredentials(mongoConfig.username instanceof String ? mongoConfig.username : '', mongoConfig.password instanceof String ? mongoConfig.password : '')
+		
+		mongoDbFactory(org.springframework.data.mongodb.core.SimpleMongoDbFactory, mongo, mongoConfig.databaseName instanceof String ? mongoConfig.databaseName : 'db', credentials)
+	}
 }
