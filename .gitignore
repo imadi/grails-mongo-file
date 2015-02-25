@@ -1,7 +1,9 @@
+.idea
 .settings
 dependencies.groovy
 grails-mongo-file*.zip*
 plugin.xml
 stacktrace.log
+*.iml
 target/
 web-app/
