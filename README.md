@@ -1,17 +1,21 @@
 MongoFile Plugin
 ================
 
-The MongoFile plugin add methods to domain instances to save, retrieve and delete associated files from a MongoDB file store. The plugin can also write a file out to an HTTP response. This plugin depends on the MongoDB plugin.
+The MongoFile plugin add methods to domain instances to save, retrieve and delete associated files from a MongoDB file store. The plugin can also write a file out to an HTTP response. This plugin does not depend on the MongoDB GORM plugin.
 
 Configuration
 -------------
 
-Once installed, append the following to DataSource.groovy:
+Once installed, the plugin should work without further configuration. However the Mongo database connection configuration can be amended by appending the following in DataSource.groovy (default values shown):
 
 ```groovy
 grails {
     mongo {
-        databaseName = "db"
+        host = 'localhost'
+        port = 27017
+        username = ''
+        password = ''
+        databaseName = 'db'
     }
 }
 ```
