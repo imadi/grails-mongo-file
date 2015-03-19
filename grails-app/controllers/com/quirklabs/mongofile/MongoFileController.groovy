@@ -6,11 +6,13 @@ class MongoFileController {
     def mongoFileService
 
     def exists(FileCommand fileCommand) {
+        bindData(fileCommand, params)
         GridFSDBFile file = getGridFSFile(fileCommand)
         file != null
     }
 
     def deliver(FileCommand fileCommand) {
+        bindData(fileCommand, params)
         GridFSDBFile file = getGridFSFile(fileCommand)
         mongoFileService.deliverGridFSFile(response,file,null,fileCommand.attachment)
     }
