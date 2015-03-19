@@ -1,5 +1,5 @@
 class MongoFileGrailsPlugin {
-    def version = "1.4.1"
+    def version = "1.4.2"
     def grailsVersion = "2.4 > *"
     def dependsOn = [:]
     def pluginExcludes = [
