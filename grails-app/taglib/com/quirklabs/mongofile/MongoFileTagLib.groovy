@@ -89,7 +89,7 @@ class MongoFileTagLib {
 	    def id = attrs.id
 	    
 	    if(!domainClass && !id && attrs.domainInstance) {
-	        domainClass = attrs.domainInstance.class.simpleName
+	        domainClass = org.hibernate.Hibernate.getClass(attrs.domainInstance).getSimpleName()
 	        id = attrs.domainInstance.id
 	    }
 	    
